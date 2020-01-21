@@ -1,0 +1,27 @@
+<div class="jumbotron mx-5 my-5">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+        <div class="form-group">
+            <label>Email address</label>
+            <input class="form-control" formControlName="email" placeholder="your-email@abc.com" required>
+            <p>Email entered by you : {{loginForm.get('email').value}}</p>
+            <div *ngIf="submitted && loginForm.controls.email.errors?.required">
+                <small class="form-text text-muted">Oops, please provide e-mail Id</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" formControlName="password" placeholder="password" required>
+            <p>Password entered by you : {{loginForm.controls.password.value}}</p>
+            <div *ngIf="submitted && loginForm.controls.password.errors?.required">
+                <div *ngIf="loginForm.controls.password.errors?.required">
+                    <small class="form-text text-muted">Password must be provided</small>
+                </div>
+                <div *ngIf="loginForm.controls.password.errors?.minLength">
+                    <small class="form-text text-muted">Oops, password must be longer.</small>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+    </form>
+    <p>Form status : {{loginForm.status}}</p>
+</div>
