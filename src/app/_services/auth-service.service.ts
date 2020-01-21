@@ -38,8 +38,10 @@ export class AuthServiceService {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user); //this will notify currentUser property 
             console.log(this.currentUser);
-            console.log("current User:" + localStorage.getItem('currentUser'))
+            console.log("current User:" + localStorage.getItem('currentUser'));
+            return user;
         }
+        return null;
       }
     ));
   }

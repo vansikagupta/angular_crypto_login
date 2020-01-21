@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loading : boolean = false;
   loginForm : FormGroup
   returnUrl : string
+  error : string;
 
   constructor(private formBuilder: FormBuilder, 
               private route: ActivatedRoute, 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)] ]
+      password: ['', Validators.required ]
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -51,10 +52,18 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.fval.email.value, this.fval.password.value)
     .pipe(first()) //unsubscribes from the observable immediately after the first value is emitted.
     .subscribe(data => {
-      this.router.navigate([this.returnUrl])
+      if(data){
+        this.router.navigate([this.returnUrl])
+      }
+      else{
+        console.log(data, 'Incorrect password');
+        this.error = 'Incorrect password'
+        this.loading = false;
+      }
     },
     error => {
-      console.log(error.error.message, 'Error');
+      console.log(error, 'Error');
+      this.error = error;
       this.loading = false;
     })
   }
