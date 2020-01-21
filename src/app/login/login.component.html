@@ -21,7 +21,10 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+        <div>
+            <button type="submit" class="btn btn-primary" [disabled]="loading">Login</button>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        </div>  
     </form>
     <p>Form status : {{loginForm.status}}</p>
 </div>
