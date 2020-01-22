@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm : FormGroup
   returnUrl : string
   error : string;
+  app = 'CryptoLoginApp';
 
   constructor(private formBuilder: FormBuilder, 
               private route: ActivatedRoute, 
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', Validators.required ]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

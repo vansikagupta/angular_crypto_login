@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'crypto-login';
+  app = 'CryptoLoginApp'
   currentUser : any;
 
   constructor(private auth : AuthServiceService,

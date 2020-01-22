@@ -1,0 +1,9 @@
+.card-header{
+    border : none;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.card-title{
+    font-family : 'Times New Roman', Times, serif;
+}
