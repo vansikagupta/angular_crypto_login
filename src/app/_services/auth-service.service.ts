@@ -25,11 +25,6 @@ export class AuthServiceService {
     this is so logging in and out of the app can only be done via the authentication service.*/
   }
 
-  getPassword(emailId) : Observable<any> {
-    //`${config.apiUrl}/users/authenticate`
-    return this.http.get<any>(this._url+emailId);
-  }
-
   login(emailId, input_password) {
     return this.http.get<any>(this._url+emailId).pipe(map(
       user => {
