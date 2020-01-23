@@ -32,7 +32,15 @@ export class AuthServiceService {
             console.log("logged in");
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user); //this will notify currentUser property 
-            console.log(this.currentUser);
+            /*let email = JSON.parse(localStorage.getItem('currentUser'), (key, value) => {
+              if(key === 'id'){
+                return value.toString();
+              }
+              return null;
+            })
+            console.log(email, 'current User');
+            */
+           console.log(JSON.parse(localStorage.getItem('currentUser'))['id'], 'current User');
             console.log("current User:" + localStorage.getItem('currentUser'));
             return user;
         }
