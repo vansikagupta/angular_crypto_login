@@ -1,4 +1,3 @@
-<p>home works!</p>
 <div>
     <form [formGroup]="resetPasswordForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
@@ -6,9 +5,11 @@
             <input type="password" class="form-control" formControlName="newPassword" [ngClass]="{ 'is-invalid': submitted && fval.newPassword.errors}">
             <div *ngIf="submitted && fval.newPassword.errors" class="invalid-feedback">
                 <div *ngIf="fval.newPassword.errors.required">This field is mandatory</div>
-                <div *ngIf="fval.newPassword.errors.minlength">Minimum length should be 8 characters.</div>
-                <div *ngIf="fval.newPassword.errors.maxlength">Maximum length can be 12 characters.</div>
-                <div *ngIf="fval.newPassword.errors.pattern">Password(alphanumeric & underscore) must start with an alphabet.</div>
+                <div [ngClass]="fval.newPassword.errors.minlength || fval.newPassword.errors.required?'text-danger':'text-success'">Minimum length should be 8 characters.</div>
+                <div [ngClass]="fval.newPassword.errors.maxlength || fval.newPassword.errors.required?'text-danger':'text-success'">Maximum length can be 12 characters.</div>
+                <div [ngClass]="fval.newPassword.errors.hasUpperCase || fval.newPassword.errors.required?'text-danger':'text-success'">Must contain 1 Upper Case alphabet.</div>
+                <div [ngClass]="fval.newPassword.errors.hasLowerCase || fval.newPassword.errors.required?'text-danger':'text-success'">Must contain 1 Lower Case alphabet.</div>
+                <div [ngClass]="fval.newPassword.errors.hasSpecialCharacter || fval.newPassword.errors.required?'text-danger':'text-success'">Must contain 1 Special Character among [ !,@,#,$,%,^,&,*,(,),_,+,-,= ].</div>
             </div>
         </div>
 

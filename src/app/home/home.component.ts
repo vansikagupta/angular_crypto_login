@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MustMatch } from '../_helper/must-match.validator';
+import { MustMatch, patternValidator } from '../_helper/custom.validator';
 import { UtilityService } from '../_services/utility.service';
 import { first } from 'rxjs/operators';
 
@@ -17,7 +17,14 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.resetPasswordForm = this.formBuilder.group({
-      newPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12), Validators.pattern('[A-Za-z]+[A-Za-z0-9_]+')]],
+      newPassword: ['', [Validators.required,
+                         Validators.minLength(8), 
+                         Validators.maxLength(12),
+                         //Validators.pattern('[A-Za-z]+[A-Za-z0-9_]+')
+                         patternValidator(/[A-Z]/, {hasUpperCase : true}),
+                         patternValidator(/[a-z]/, {hasLowerCase : true}),
+                         patternValidator(/[!@#$%^&*()_+\-=]/, {hasSpecialCharacter : true}),
+                        ]],
       confirmPassword: ['', Validators.required]
     },
     {
