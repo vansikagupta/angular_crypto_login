@@ -10,11 +10,17 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'crypto-login';
   app = 'CryptoLoginApp'
-  currentUser : any;
+  currentUser: any;
+  userId: string;
 
   constructor(private auth : AuthServiceService,
               private router : Router) {
-    this.auth.currentUser.subscribe(data => this.currentUser = data)
+    this.auth.currentUser
+    .subscribe(data => {
+      this.currentUser = data;
+      this.userId = JSON.parse(localStorage.getItem('currentUser'))['id'];
+    });
+    
   }
 
   logout() {
