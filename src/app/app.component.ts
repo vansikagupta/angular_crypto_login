@@ -11,16 +11,16 @@ export class AppComponent {
   title = 'crypto-login';
   app = 'CryptoLoginApp'
   currentUser: any;
-  userId: string;
 
   constructor(private auth : AuthServiceService,
               private router : Router) {
-    this.auth.currentUser
-    .subscribe(data => {
-      this.currentUser = data;
-      this.userId = JSON.parse(localStorage.getItem('currentUser'))['id'];
-    });
-    
+    this.auth.currentUser.subscribe(data => this.currentUser = data);
+    //this.auth.currentUser.subscribe(data => this.userId = JSON.parse(localStorage.getItem('currentUser'))['id']);
+  }
+
+  get loggedUser(){
+    //this.userId = JSON.parse(localStorage.getItem('currentUser'))['id']);
+    return this.auth.currentUserValue
   }
 
   logout() {
